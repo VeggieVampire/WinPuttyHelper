@@ -111,7 +111,7 @@ echo Your batch file is found in %curdir% named WinPuttyHelper.bat
 echo click on WinPuttyHelper.bat to login to %TSEV% with %TUSR%
 echo to change the commands you will need to edit post_login_cmds.txt
 echo %curdir%/WinPuttyHelper.bat
-
+GOTO :EOF
 
 :GNO 
 cls
@@ -122,6 +122,6 @@ echo Your batch file is found in %curdir% named WinPuttyHelper.bat
 echo click on WinPuttyHelper.bat to login to %TSEV% with %TUSR%
 echo %curdir%/WinPuttyHelper.bat
 
-PAUSE
+GOTO :EOF
 
 :EOF
