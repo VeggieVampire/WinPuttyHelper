@@ -1,5 +1,5 @@
 @echo off
-
+REM https://github.com/VeggieVampire/WinPuttyHelper
 REM set Putty local path
 set PPATH="C:\YOUR_PUTTY_PATH"
 REM Set the server name or IP address you wanting to connect
