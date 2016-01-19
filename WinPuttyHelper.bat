@@ -10,7 +10,6 @@ REM Set key authentication file to login with. THIS IS NOT A PASSWORD FILE!! Use
 set LKEY=private.ppk
 REM Set full path and filename for commands you want to run on the remote server.
 set PCMDS=post_login_cmds.txt
-
 REM start script
 cd %PPATH%
 putty.exe -ssh %USR%@%SEV% -i %LKEY% -m %PCMDS%
