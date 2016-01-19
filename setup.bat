@@ -1,5 +1,5 @@
 @echo off
-
+set datetimef=%date:~10,4%.%date:~4,2%.%date:~7,2%
 REM clear temp file
 echo @echo off >temp.config.txt
 cls
@@ -81,9 +81,10 @@ echo.
 echo.
 echo.
 echo.
-SET /P ANSWER2=Do you see the %TUSR% repeated on the putty screen(Y/N)
+SET /P ANSWER2=Do you see the user %TUSR% repeated on the putty screen(Y/N)
 if /i {%ANSWER2%}=={y} (goto :KEYPASS) 
-if /i {%ANSWER2%}=={yes} (goto :KEYPASS) 
+if /i {%ANSWER2%}=={yes} (goto :KEYPASS)
+ 
 goto :kno 
 
 :kno 
@@ -100,28 +101,34 @@ echo Post Login Command are what you want to run on the server then exits.
 SET /P ANSWER3=Do you want to run Post Login Commands (Y/N)?
 if /i {%ANSWER2%}=={y} (goto :GYES) 
 if /i {%ANSWER2%}=={yes} (goto :GYES) 
-goto :GNO 
+
+GOTO GNO 
 
 :GYES
 cls
-echo %PPATH% -ssh %USR%@%SEV% -i %LKEY% -m post_login_cmds.txt >>temp.config.txt
-move temp.config.txt %curdir%/WinPuttyHelper.bat
+echo @echo off >>WinPuttyHelper.%datetimef%.bat
+echo %TPPATH%\putty.exe -ssh %TUSR%@%TSEV% -i %TLKEY% -m post_login_cmds.txt >temp.config.txt
+ren temp.config.txt WinPuttyHelper.%datetimef%.bat
+move %cd%\temp.config.txt %cd%\WinPuttyHelper.%datetimef%.bat
 
-echo Your batch file is found in %curdir% named WinPuttyHelper.bat
-echo click on WinPuttyHelper.bat to login to %TSEV% with %TUSR%
+echo Your batch file is found in %cd% named WinPuttyHelper.%datetimef%.bat
+echo click on WinPuttyHelper.%datetimef%.bat to login to server %TSEV% with user %TUSR%
 echo to change the commands you will need to edit post_login_cmds.txt
-echo %curdir%/WinPuttyHelper.bat
+echo %cd%\WinPuttyHelper.%datetimef%.bat
+pause
 GOTO :EOF
 
 :GNO 
 cls
-echo %PPATH% -ssh %USR%@%SEV% -i %LKEY%  >>temp.config.txt
-move temp.config.txt %curdir%/WinPuttyHelper.bat
+echo @echo off >>WinPuttyHelper.%datetimef%.bat
+echo %TPPATH%\putty.exe -ssh %TUSR%@%TSEV% -i %TLKEY% >temp.config.txt
+dir
+move %cd%\temp.config.txt %cd%\WinPuttyHelper.%datetimef%.bat
 
-echo Your batch file is found in %curdir% named WinPuttyHelper.bat
-echo click on WinPuttyHelper.bat to login to %TSEV% with %TUSR%
-echo %curdir%/WinPuttyHelper.bat
-
+echo Your batch file is found in %cd% named WinPuttyHelper.%datetimef%.bat
+echo click on WinPuttyHelper.%datetimef%.bat to login to server %TSEV% with user %TUSR%
+echo %cd%\WinPuttyHelper.%datetimef%.bat
+pause
 GOTO :EOF
 
 :EOF
