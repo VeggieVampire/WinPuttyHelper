@@ -23,7 +23,7 @@ REM checks for path to putty is real
 if exist %TPPATH%\putty.exe (
     rem file exists
 	echo Putty found at your path %TPPATH%
-	echo set PPATH="%TPPATH%\putty.exe" >>temp.config.txt
+	
 	goto PGOOD
 ) else (
 	rem file doesn't exist
@@ -46,7 +46,7 @@ findstr /m "TTL" %tempfile%
 if %errorlevel%==0 (
 echo There is hope! server found
 del %tempfile% 
-echo set SEV=%TSEV% >>temp.config.txt
+
 goto SERGOOD
 ) else (
 echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -61,7 +61,7 @@ echo.
 REM Set remote servers user name that will be used to connect
 set TUSR=USER_NAME
 set /p TUSR="What is the User name  for %TSEV%:"
-echo set USR=%TUSR% >>temp.config.txt
+
 
 
 REM checks with user if they have setup a key
@@ -73,7 +73,7 @@ goto :kno
 :kyes 
 echo Example:    C:\Putty\MyCoolKey.ppk
 set /p TLKEY="Set the location and file for PPK key:"
-echo set LKEY=%TLKEY% >>temp.config.txt
+
 
 %TPPATH%\putty.exe -ssh %TUSR%@%TSEV% -i %TLKEY% -m post_login_cmds.txt
 echo.
